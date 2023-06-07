@@ -1,5 +1,5 @@
+import { Box, Pressable, Text } from "native-base";
 import * as React from "react";
-import { Text, Box, Pressable } from "native-base";
 
 export default function Hello({ navigation }) {
   return (

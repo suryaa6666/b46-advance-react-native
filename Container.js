@@ -1,19 +1,52 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Form from "./src/screens/formNativeBase";
 import Hello from "./src/screens/hello";
 import IncDec from "./src/screens/incDec";
+import { Ionicons } from "@expo/vector-icons";
 import "react-native-gesture-handler";
+import { useTheme } from "native-base";
+
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+function MyTabs() {
+  const theme = useTheme()
+  return (
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={({ route }) => ({
+        tabBarActiveTintColor: "black",
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === "Home") {
+            iconName = focused ? "ios-home" : "ios-home-outline";
+          } else if(route.name === "Form") {
+            iconName = focused ? "book" : "book-outline"
+          } else if(route.name === "IncDec") {
+            iconName = focused ? "add-circle" : "add-circle-outline"
+          }
+
+          return <Ionicons name={iconName} size={24} color={theme.colors.amber["500"]} />
+        },
+      })}
+    >
+      <Tab.Screen name="Home" component={Hello} />
+      <Tab.Screen name="Form" component={Form} />
+      <Tab.Screen name="IncDec" component={IncDec} />
+    </Tab.Navigator>
+  );
+}
 
 function Container() {
-  const Stack = createStackNavigator();
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
-          component={Hello}
+          component={MyTabs}
           options={{
             headerShown: false,
           }}
