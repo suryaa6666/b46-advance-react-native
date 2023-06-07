@@ -7,6 +7,8 @@ import IncDec from "./src/screens/incDec";
 import { Ionicons } from "@expo/vector-icons";
 import "react-native-gesture-handler";
 import { useTheme } from "native-base";
+import ListSoc from "./src/screens/listSoc";
+import DetailSoc from "./src/screens/detailSoc";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -33,7 +35,7 @@ function MyTabs() {
         },
       })}
     >
-      <Tab.Screen name="Home" component={Hello} />
+      <Tab.Screen name="Home" component={ListSoc} />
       <Tab.Screen name="Form" component={Form} />
       <Tab.Screen name="IncDec" component={IncDec} />
     </Tab.Navigator>
@@ -55,6 +57,13 @@ function Container() {
         <Stack.Screen
           name="IncDec"
           component={IncDec}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Detail Social Media"
+          component={DetailSoc}
           options={{
             headerShown: false,
           }}
