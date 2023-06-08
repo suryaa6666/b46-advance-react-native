@@ -9,12 +9,13 @@ import "react-native-gesture-handler";
 import { useTheme } from "native-base";
 import ListSoc from "./src/screens/listSoc";
 import DetailSoc from "./src/screens/detailSoc";
+import Axios from "./src/screens/axios";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 function MyTabs() {
-  const theme = useTheme()
+  const theme = useTheme();
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -25,17 +26,29 @@ function MyTabs() {
 
           if (route.name === "Home") {
             iconName = focused ? "ios-home" : "ios-home-outline";
-          } else if(route.name === "Form") {
-            iconName = focused ? "book" : "book-outline"
-          } else if(route.name === "IncDec") {
-            iconName = focused ? "add-circle" : "add-circle-outline"
+          } else if (route.name === "Form") {
+            iconName = focused ? "book" : "book-outline";
+          } else if (route.name === "IncDec") {
+            iconName = focused ? "add-circle" : "add-circle-outline";
           }
 
-          return <Ionicons name={iconName} size={24} color={theme.colors.amber["500"]} />
+          return (
+            <Ionicons
+              name={iconName}
+              size={24}
+              color={theme.colors.amber["500"]}
+            />
+          );
         },
       })}
     >
-      <Tab.Screen name="Home" component={ListSoc} />
+      <Tab.Screen
+        name="Home"
+        component={Axios}
+        options={{
+          unmountOnBlur: true,
+        }}
+      />
       <Tab.Screen name="Form" component={Form} />
       <Tab.Screen name="IncDec" component={IncDec} />
     </Tab.Navigator>
